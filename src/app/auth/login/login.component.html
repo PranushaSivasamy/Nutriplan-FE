@@ -1,0 +1,106 @@
+<div class="content">
+  <div class="inner-content">
+    <div class="row">
+      <div class="col-7">
+        <img
+          src="https://www.thelastfoodblog.com/wp-content/uploads/2017/09/mushroom-curry-landscape.jpg"
+          width="100%"
+          height="100%"
+          style="filter: saturate(130%)"
+        />
+      </div>
+      <div class="col-5">
+        <div
+          style="
+            margin-left: 45px;
+            margin-right: 45px;
+            margin-top: 20px;
+            margin-bottom: 46px;
+            filter: saturate(120%);
+          "
+        >
+          <div class="card-header text-center mb-3"><img
+            src="https://cdn4.iconfinder.com/data/icons/fruits-79/48/08-orange-256.png"
+            height="25px"
+            width="25px"
+            style="margin-right: 5px;filter:saturate(120%);"
+          />NUTRIPLAN</div>
+          <h6>Login with your username and password</h6>
+          <form [formGroup]="userlogin" (ngSubmit)="onLogin()">
+            <div class="row mt-3">
+              <label>Username</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="username"
+              />
+            </div>
+
+            <div class="invalid">
+              <ng-container
+                *ngIf="
+                  control.username.invalid &&
+                    (control.username.touched || control.username.dirty);
+                  else elseblk
+                "
+              >
+                <span *ngIf="control.username.errors?.required"
+                  >*Username required!</span
+                >
+              </ng-container>
+              <ng-template #elseblk>
+                <span>&nbsp;</span>
+              </ng-template>
+            </div>
+
+            <div class="row">
+              <label>Password</label>
+              <input
+                type="password"
+                class="form-control"
+                formControlName="password"
+                (input)="confirmPasswordDirty()"
+              />
+            </div>
+
+            <div class="invalid">
+              <ng-container
+                *ngIf="
+                 ( control.password.invalid &&
+                    (control.password.touched || control.password.dirty))||loginResultFailed;
+                  else elseblk
+                "
+              >
+                <span *ngIf="control.password.errors?.required"
+                  >*Password required!</span
+                >
+                <span *ngIf="loginResultFailed; else elseblk">
+                  *Invalid username or password
+                </span>
+              </ng-container>
+              <ng-template #elseblk>
+                <span>&nbsp;</span>
+              </ng-template>
+            </div>
+
+            <div class="row" style="margin-top: 20px; margin-left: 2px">
+              <button
+                type="submit"
+                class="btn save-button"
+                [disabled]="!userlogin.valid"
+              >
+                Login
+              </button>
+            </div>
+            <div style="text-align: center">
+              <p>
+                Don't have an account?
+                <a routerLink="/auth/register">Register</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
